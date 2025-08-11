@@ -133,7 +133,7 @@ $user->takeOwnershipFrom($post);
 
 Methods available on owner models:
 
-- `ownerships()` - Relationship to ownership records
+- `possessions()` - Relationship to ownership records
 - `ownables()` - Relationship to owned items
 - `owns($ownable)` - Check if owns a specific item
 - `giveOwnershipTo($ownable)` - Give ownership of an item

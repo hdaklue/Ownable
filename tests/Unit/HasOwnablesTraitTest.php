@@ -14,7 +14,7 @@ class HasOwnablesTraitTest extends TestCase
     {
         $user = User::create(['name' => 'John Doe', 'email' => 'john@example.com']);
 
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class, $user->ownerships());
+        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\MorphMany::class, $user->possessions());
     }
 
     /** @test */
@@ -180,7 +180,7 @@ class HasOwnablesTraitTest extends TestCase
 
         $this->assertTrue($user->owns($post1));
         $this->assertTrue($user->owns($post2));
-        $this->assertEquals(2, $user->ownerships()->count());
+        $this->assertEquals(2, $user->possessions()->count());
     }
 
     /** @test */
