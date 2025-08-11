@@ -17,7 +17,7 @@ trait HasOwnables
      * 
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function ownerships()
+    public function possessions()
     {
         return $this->morphMany(Ownership::class, 'owner');
     }
