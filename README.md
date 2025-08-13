@@ -15,7 +15,7 @@ A Laravel package to handle ownership relationships between Eloquent models. Thi
 ## Requirements
 
 - PHP ^8.0
-- Laravel ^9.0 or ^10.0
+- Laravel ^9.0, ^10.0, ^11.0 or ^12.0
 
 ## Installation
 
