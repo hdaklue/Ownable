@@ -37,6 +37,14 @@
       }
     }
   },
+  "scripts": {
+    "post-install-cmd": [
+      "@php -r \"if (file_exists('artisan')) { echo 'Ownable package installed successfully. Run php artisan vendor:publish --provider=Sowailem\\\\Ownable\\\\OwnableServiceProvider --tag=ownable-migrations to publish migrations.'; }\""
+    ],
+    "pre-uninstall-cmd": [
+      "@php -r \"if (file_exists('artisan')) { echo 'Before removing Ownable, consider running: php artisan ownable:prepare-uninstall'; }\""
+    ]
+  },
   "minimum-stability": "stable",
   "prefer-stable": true
 }
