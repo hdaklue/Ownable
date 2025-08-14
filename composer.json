@@ -38,7 +38,7 @@
     }
   },
   "scripts": {
-    "post-package-uninstall": [
+    "pre-package-uninstall": [
       "@php scripts/cleanup-package.php"
     ]
   },
