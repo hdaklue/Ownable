@@ -3,7 +3,7 @@
 namespace Sowailem\Ownable;
 
 use Illuminate\Support\ServiceProvider;
-use Sowailem\Ownable\Console\Commands\PrepareUninstallCommand;
+use Sowailem\Ownable\Contracts\Ownable;
 
 /**
  * Service provider for the Ownable package.
@@ -22,8 +22,12 @@ class OwnableServiceProvider extends ServiceProvider
      * 
      * @return void
      */
-    public function register()
+    public function register(): void
     {
+        if (!class_exists(Ownable::class)) {
+            return;
+        }
+
         $this->mergeConfigFrom(__DIR__.'/../config/ownable.php', 'ownable');
 
         $this->app->singleton('owner', function ($app) {
@@ -39,16 +43,13 @@ class OwnableServiceProvider extends ServiceProvider
      * 
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        // Register console commands
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                PrepareUninstallCommand::class,
-            ]);
+        if (!class_exists(Ownable::class)) {
+            return;
         }
+
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
             __DIR__.'/../config/ownable.php' => config_path('ownable.php'),

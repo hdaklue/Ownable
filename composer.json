@@ -27,6 +27,15 @@
       "Sowailem\\Ownable\\Tests\\": "tests/"
     }
   },
+  "scripts": {
+    "post-autoload-dump": [
+      "@php artisan package:discover --ansi"
+    ],
+    "post-package-uninstall": [
+      "@php artisan vendor:publish --tag=ownable-config --force",
+      "@php artisan config:clear"
+    ]
+  },
   "extra": {
     "laravel": {
       "providers": [
@@ -36,14 +45,6 @@
         "Owner": "Sowailem\\Ownable\\Facades\\Owner"
       }
     }
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "@php -r \"if (file_exists('artisan')) { echo 'Ownable package installed successfully. Run php artisan vendor:publish --provider=Sowailem\\\\Ownable\\\\OwnableServiceProvider --tag=ownable-migrations to publish migrations.'; }\""
-    ],
-    "pre-uninstall-cmd": [
-      "@php -r \"if (file_exists('artisan')) { echo 'Before removing Ownable, consider running: php artisan ownable:prepare-uninstall'; }\""
-    ]
   },
   "minimum-stability": "stable",
   "prefer-stable": true
