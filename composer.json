@@ -27,11 +27,6 @@
       "Sowailem\\Ownable\\Tests\\": "tests/"
     }
   },
-  "scripts": {
-    "post-autoload-dump": [
-      "@php artisan package:discover --ansi"
-    ]
-  },
   "extra": {
     "laravel": {
       "providers": [
