@@ -3,7 +3,6 @@
 namespace Sowailem\Ownable;
 
 use Illuminate\Support\ServiceProvider;
-use Sowailem\Ownable\Contracts\Ownable;
 
 /**
  * Service provider for the Ownable package.
@@ -24,14 +23,12 @@ class OwnableServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if (!class_exists(Ownable::class)) {
-            return;
+        if ($this->app->bound('config')) {
+            $this->mergeConfigFrom(__DIR__.'/../config/ownable.php', 'ownable');
         }
 
-        $this->mergeConfigFrom(__DIR__.'/../config/ownable.php', 'ownable');
-
         $this->app->singleton('owner', function ($app) {
-            return new Owner();
+            return new \Sowailem\Ownable\Owner();
         });
     }
 
@@ -45,10 +42,6 @@ class OwnableServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (!class_exists(Ownable::class)) {
-            return;
-        }
-
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
