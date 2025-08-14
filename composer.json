@@ -37,6 +37,9 @@
       }
     }
   },
+  "scripts": {
+    "post-autoload-dump": []
+  },
   "minimum-stability": "stable",
   "prefer-stable": true
 }
