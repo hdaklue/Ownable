@@ -38,7 +38,9 @@
     }
   },
   "scripts": {
-    "post-autoload-dump": []
+    "post-package-uninstall": [
+      "@php scripts/cleanup-package.php"
+    ]
   },
   "minimum-stability": "stable",
   "prefer-stable": true
