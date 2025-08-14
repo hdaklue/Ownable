@@ -30,10 +30,6 @@
   "scripts": {
     "post-autoload-dump": [
       "@php artisan package:discover --ansi"
-    ],
-    "post-package-uninstall": [
-      "@php artisan vendor:publish --tag=ownable-config --force",
-      "@php artisan config:clear"
     ]
   },
   "extra": {
