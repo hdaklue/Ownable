@@ -23,11 +23,13 @@ class OwnableServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if ($this->app->bound('config')) {
-            $this->mergeConfigFrom(__DIR__.'/../config/ownable.php', 'ownable');
+        $configPath = dirname(__DIR__).'/config/ownable.php';
+
+        if ($this->app->bound('config') && file_exists($configPath)) {
+            $this->mergeConfigFrom($configPath, 'ownable');
         }
 
-        $this->app->singleton('owner', function ($app) {
+        $this->app->singleton('ownable.owner', function ($app) {
             return new \Sowailem\Ownable\Owner();
         });
     }
@@ -42,14 +44,16 @@ class OwnableServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                dirname(__DIR__).'/config/ownable.php' => config_path('ownable.php'),
+            ], 'ownable-config');
 
-        $this->publishes([
-            __DIR__.'/../config/ownable.php' => config_path('ownable.php'),
-        ], 'ownable-config');
+            $this->publishes([
+                dirname(__DIR__).'/database/migrations' => database_path('migrations'),
+            ], 'ownable-migrations');
+        }
 
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'ownable-migrations');
+        $this->loadMigrationsFrom(dirname(__DIR__).'/database/migrations');
     }
 }
